@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<!--  
+Copyright (C) 2023 ading2210
+See README.md for more information
+-->
+
+<html>
+  <head>
+    <title id="title">Loading resources...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body class="flex sm:w-screen sm:h-screen max-sm:flex-col text-slate-200 bg-slate-900">
+    <div id="header_div" class="flex flex-col sm:w-72 gap-2 p-3 bg-slate-800 sm:overflow-auto">
+      <div class="w-full">
+        <img id="thumbnail_img" src="https://via.placeholder.com/320x180?text=Loading..." class="rounded-lg mt-0.5">
+      </div>
+      <div id="title_div" class="space-y-1">
+        <p class="text-lg font-bold"><span id="assignment_title">Loading assignment data...</span></h2>
+        <p class="text-xs">Assigned by <span id="assignment_author" class="">[unknown]</span></p>
+        <p class="text-xs"><span id="assignment_end">Due [unknown]</span></p>
+        <p class="text-xs">Correct choices are <u>underlined</u>.</p>
+        <input id="skipper_button" class="ui_button" type="button" value="Skip Video" onclick="video_skipper.skip_video();" disabled/>
+        <input id="answers_button" class="ui_button" type="button" value="Answer Questions" onclick="auto_answers.answer_questions();" disabled/>
+        <div id="speed_container" class="flex gap-1 items-center">
+          <label class="text-xs" for="speed_dropdown">Video speed:</label>
+          <select id="speed_dropdown" class="ui_button" name="speed_dropdown" onchange="video_options.video_speed()" disabled>
+            <option value="0.25">0.25</option>
+            <option value="0.5">0.5</option>
+            <option value="0.75">0.75</option>
+            <option value="1" selected>Normal</option>
+            <option value="1.25">1.25</option>
+            <option value="1.5">1.5</option>
+            <option value="1.75">1.75</option>
+            <option value="2">2</option>
+            <option value="-1">Custom</option>
+          </select>
+        </div>
+        <div id="custom_speed_container" class="gap-1 items-center hidden">
+          <label id="custom_speed_label" class="text-xs" for="custom_speed">Custom speed: <span id="custom_speed_value" class="font-mono"></span></label>
+          <input id="custom_speed" class="accent-slate-500" type="range" name="custom_speed" value="1" min="0.1" max="16" step="0.1" oninput="video_options.video_speed()">
+        </div>
+        <div id="options_container" class="flex gap-1 items-center">
+          <label for="unfocus_checkbox" class="text-xs">Don't pause on unfocus: </label>
+          <input id="unfocus_checkbox" class="accent-slate-500" type="checkbox" name="unfocus_checkbox" onchange="video_options.toggle_unfocus();" disabled>
+        </div>
+      </div>
+    </div>
+
+    <div id="content_div" class="flex flex-col flex-1 pt-3 gap-3 sm:overflow-auto"> 
+      <p class="p-2 text-xs" id="status_text">
+        Loading assignment data...
+      </p>
+      
+      <!-- templates for questions -->
+      <table id="question_template" class="hidden mx-3">
+        <tr class="rounded-lg border-separate">
+          <td class="w-16 text-[13px] p-2.5 pr-0 align-top rounded-l-lg bg-slate-800">
+            <span key="timestamp"></span>
+          </td>
+          <td class="font-bold text-[13px] p-2 rounded-r-lg bg-slate-800">
+            <span key="title"></span>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td key="question_content" class="text-xs p-2"></td>
+        </tr>
+      </table>
+      <ul id="multiple_choice_template" class="hidden list-disc">
+        <li key="question_choice" class="ml-6"></li>
+      </ul>
+      <div id="open_ended_template" class="hidden flex-col items-end gap-1">
+        <textarea key="question_textarea" class="textarea" rows=3 placeholder='Use the "Generate Response" button to generate an answer for this open-ended question.'></textarea>
+        <div key="buttons_div" class="flex gap-1">
+          <button key="generator_button" class="p-1.5 rounded-md bg-slate-900 border border-slate-700">Generate Response</button>
+          <button key="submit_button" class="p-1.5 rounded-md bg-slate-900 border border-slate-700">Submit</button>
+        </div>
+      </div>
+      <div id="open_ended_menu_template" class="hidden flex-col w-full px-3 gap-2 text-xs">
+        <div class="w-full text-[13px] p-2.5 rounded-lg bg-slate-800 font-bold">
+          <p key="title"></p>
+        </div>
+        <div class="flex flex-col px-2 gap-1">
+          <p>Prompt:</p>
+          <textarea key="prompt_textarea" class="textarea" rows=4 placeholder="Loading prompt..." disabled></textarea>
+          <p class="mt-1">Generated:</p>
+          <textarea key="generated_textarea" class="textarea" rows=4 placeholder="Generated text will appear here."></textarea>
+          
+          <div class="flex items-center gap-2">
+            <p>Service:</p>
+            <select key="service_dropdown" class="ui_button" disabled>
+            </select>
+            <p key="model_label">Model:</p>
+            <select key="model_dropdown" class="ui_button hidden">
+              <option value="default">Default</option>
+            </select>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button key="cancel_button" class="ui_button px-2 py-1">Cancel</button>
+            <div class="flex-1"></div>
+            <button key="generate_button" class="ui_button px-2 py-1">Generate</button>
+            <button key="save_button" class="ui_button px-2 py-1">Save</button>
+          </div>
+        </div>
+      </div>
+      <!-- end templates -->
+
+      <div id="questions_div" class="flex flex-col gap-1">
+      </div>
+      <div id="open_ended_div" class="hidden w-full">
+      </div>
+      
+      <!-- spacer -->
+      <div class="flex flex-1"></div>
+            
+
+    </div>
+  </body>
+</html>
