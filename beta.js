@@ -1,8 +1,4 @@
-var mirrors = [
-    "https://edpuzzle.librecheats.net",
-    "https://edpuzzle.hs.vc",
-    "https://edpuzzle-beta.hs.vc"
-  ];
+var mirrors = "xoapop.github.io"
   
   async function try_mirror(mirror) {
     let r = await fetch(mirror + "/app/main.js");
