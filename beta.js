@@ -1,4 +1,4 @@
-var mirrors = "https://xoapop.github.io"
+var mirrors = ["https://xoapop.github.io"]
   
   async function try_mirror(mirror) {
     let r = await fetch(mirror + "/app/main.js");
