@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'CustomCursive';  /* Change to your actual font name */
+    src: url('dedi.ttf') format('truetype'); /* Make sure the file is in the same folder */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Brush Script MT', cursive;
+}
+
+h1 {
+    font-size: 4rem;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+}
